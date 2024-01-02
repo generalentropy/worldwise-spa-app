@@ -77,3 +77,8 @@ input:focus {
     "description": "Import CSS Module as `styles`"
   },
 */
+
+span.fi {
+  height: 40px;
+  width: 40px;
+}

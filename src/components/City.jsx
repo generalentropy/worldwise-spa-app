@@ -1,4 +1,5 @@
 import styles from "./City.module.css";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -12,19 +13,19 @@ function City() {
   // TEMP DATA
   const currentCity = {
     cityName: "Lisbon",
-    emoji: "🇵🇹",
+    iso: "PT",
     date: "2027-10-31T15:59:59.138Z",
     notes: "My favorite city so far!",
   };
 
-  const { cityName, emoji, date, notes } = currentCity;
+  const { cityName, iso, date, notes } = currentCity;
 
   return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <span className={`fi fi-${iso}`}></span> {cityName}
         </h3>
       </div>
 
@@ -51,9 +52,7 @@ function City() {
         </a>
       </div>
 
-      <div>
-        <ButtonBack />
-      </div>
+      <div>{/* <ButtonBack /> */}</div>
     </div>
   );
 }
