@@ -64,21 +64,7 @@ input:focus {
   text-transform: uppercase;
   text-decoration: none;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 800;
   padding: 1rem 3rem;
   border-radius: 5px;
-}
-
-/*
-"importCSSModule": {
-    "prefix": "csm",
-    "scope": "javascript,typescript,javascriptreact",
-    "body": ["import styles from './${TM_FILENAME_BASE}.module.css'"],
-    "description": "Import CSS Module as `styles`"
-  },
-*/
-
-span.fi {
-  height: 40px;
-  width: 40px;
 }

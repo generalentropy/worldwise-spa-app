@@ -13,3 +13,8 @@
 .cityList::-webkit-scrollbar {
   width: 0;
 }
+
+:global(span.fi) {
+  height: 30px;
+  width: 30px;
+}
