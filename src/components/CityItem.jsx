@@ -1,5 +1,5 @@
 import styles from "./CityItem.module.css";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { Link } from "react-router-dom";
 
 // function isWindowsAndChromiumBased() {
 //   // Check if the OS is Windows
@@ -23,14 +23,20 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  const { cityName, iso, date } = city;
-  return (
-    <li className={styles.cityItem}>
-      <span className={`fi fi-${iso}`}></span>
-      <h3 className={styles.name}>{cityName}</h3>
-      <time className={styles.name}>({formatDate(date)})</time>
+  const { cityName, iso, date, id, position } = city;
 
-      <button className={styles.deleteBtn}>&times;</button>
+  return (
+    <li>
+      <Link
+        className={styles.cityItem}
+        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+      >
+        <span className={`fi fi-${iso}`}></span>
+        <h3 className={styles.name}>{cityName}</h3>
+        <time className={styles.name}>({formatDate(date)})</time>
+
+        <button className={styles.deleteBtn}>&times;</button>
+      </Link>
     </li>
   );
 }
