@@ -1,11 +1,9 @@
-// "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 import styles from "./Form.module.css";
-
 import BackButton from "./BackButton";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -15,13 +13,41 @@ export function convertToEmoji(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
-function Form() {
-  // const navigate = useNavigate();
+const BASE_URL = `https://api.bigdatacloud.net/data/reverse-geocode-client?`;
 
+function Form() {
+  const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
+  const [mapLat, mapLng] = useUrlPosition();
   const [cityName, setCityName] = useState("");
-  // const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+
+  const countryISO = country ? country.countryCode.toLowerCase() : "";
+
+  useEffect(
+    function () {
+      async function getCountry() {
+        try {
+          setIsLoadingGeocoding(true);
+          const res = await fetch(
+            `${BASE_URL}latitude=${mapLat}&longitude=${mapLng}`
+          );
+          const data = await res.json();
+
+          setCityName(data.city);
+          setCountry(data);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setIsLoadingGeocoding(false);
+        }
+      }
+
+      getCountry();
+    },
+    [mapLat, mapLng]
+  );
 
   return (
     <form className={styles.form}>
@@ -29,9 +55,11 @@ function Form() {
         <label htmlFor="cityName">City name</label>
         <input
           id="cityName"
-          onChange={(e) => setCityName(e.target.value)}
-          value={cityName}
+          onChange={(e) => setCountry(e.target.value)}
+          value={isLoadingGeocoding ? "Loading..." : cityName}
         />
+
+        <span className={`fi fi-${countryISO} ${styles.flag}`}></span>
         {/* <span className={styles.flag}>{emoji}</span> */}
       </div>
 
