@@ -95,6 +95,18 @@
         "lng": "-9.141311645507814"
       },
       "id": 10
+    },
+    {
+      "cityName": "Addlestone",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "iso": "gb",
+      "date": "2024-01-15T14:13:56.832Z",
+      "notes": "",
+      "position": {
+        "lat": "51.37092307114478",
+        "lng": "-0.5287170410156251"
+      },
+      "id": 11
     }
   ]
 }
